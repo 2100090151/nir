@@ -115,32 +115,23 @@ class LoginForm(forms.Form):
 
 
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        captcha = request.POST.get('g-recaptcha-response')
 
-        if captcha:
-            form = LoginForm(request.POST)
-            if form.is_valid():
-                user = auth.authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)
 
-                if user is not None:
-                    auth.login(request, user)
-                    messages.success(request, 'You are now logged in')
-                    return redirect('dashboard')
-                else:
-                    messages.error(request, 'Invalid credentials')
-                    return redirect('login')
-        else:
+        if user is not None:
+            auth.login(request, user)
             messages.success(request, 'You are now logged in')
             return redirect('dashboard')
+        else:
+            messages.error(request, 'Invalid credentials')
+            return redirect('login')
     else:
-        form = LoginForm()
-        return render(request, 'accounts/login.html', {'form': form})
-
-
+        return render(request, 'accounts/login.html')
 
 def logout(request):
     if request.method == "POST":
