@@ -131,11 +131,11 @@ def login(request):
                     messages.success(request, 'You are now logged in')
                     return redirect('dashboard')
                 else:
-                    messages.success(request, 'You are now logged in')
-                    return redirect('dashboard')
+                    messages.error(request, 'Invalid credentials')
+                    return redirect('login')
         else:
-            messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-            return redirect('login')
+            messages.success(request, 'You are now logged in')
+            return redirect('dashboard')
     else:
         form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form})
