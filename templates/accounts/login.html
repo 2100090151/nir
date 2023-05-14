@@ -39,16 +39,11 @@
               <div class="form-group">
                 <a href="{% url 'register' %}">Don't have an account? Sign up here.</a>
               </div>
-
-              <form method="post">
-                  {% csrf_token %}
-                  {{ form.captcha }}
-                <input
+              <input
                 type="submit"
                 value="Login"
                 class="btn btn-success btn-block"
               />
-              </form>
             </form>
           </div>
         </div>
