@@ -131,8 +131,8 @@ def login(request):
                     messages.success(request, 'You are now logged in')
                     return redirect('dashboard')
                 else:
-                    messages.error(request, 'Invalid credentials')
-                    return redirect('login')
+                    messages.success(request, 'You are now logged in')
+                    return redirect('dashboard')
         else:
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
             return redirect('login')
